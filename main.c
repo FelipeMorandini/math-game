@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 typedef struct {
     int difficulty;
@@ -85,21 +86,23 @@ void play() {
         printf("Unrecognised operation.\n");
     }
 
-    printf("Do you wish to keep playing? [1=Y/2=N]\n");
-    int cont;
-    scanf("%d", &cont);
+    printf("Do you wish to keep playing? [Y/N]\n");
+    char cont;
+    scanf("%c", &cont);
+    cont = toupper(cont);
     fflush(stdin);
 
-    while (cont != 1 && cont != 2) {
+    while (cont != 'Y' && cont != 'N') {
         printf("Invalid option!\n");
-        printf("Do you wish to keep playing? [1=Y/2=N]\n");
-        scanf("%d", &cont);
+        printf("Do you wish to keep playing? [Y/N]\n");
+        scanf("%c", &cont);
+        cont = toupper(cont);
         fflush(stdin);
     }
 
-    if(cont == 1) {
+    if(cont == 'Y') {
         play();
-    } else if (cont == 2) {
+    } else {
         printf("Thank you for playing! You finished with %d point(s)\n", points);
         exit(0);
     }
